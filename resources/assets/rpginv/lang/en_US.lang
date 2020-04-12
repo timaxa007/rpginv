@@ -1,0 +1,32 @@
+
+item.equipment_mask.name=Mask
+item.equipment_neck.name=Necklace
+item.equipment_belt.name=Belt
+item.equipment_gloves.name=Gloves
+item.equipment_cloak.name=Cloak
+item.equipment_shoulders.name=Shoulders
+item.equipment_sleeves.name=Sleeves
+item.equipment_amulet.name=Amulet
+item.equipment_backpack.name=Backpack
+item.equipment_ring.name=Ring
+
+item.uni_equipment.name=Universal Equipment
+
+item.armor_helmet.name=Armor Helmet
+item.armor_vest.name=Armor Vest
+item.armor_pants.name=Armor Pants
+item.armor_boots.name=Armor Boots
+
+item.armor_uni.name=Universal Armor
+
+slot_for.text=Slot for type "%s".
+mask.text=Mask
+neck.text=Neck
+belt.text=Belt
+gloves.text=Gloves
+cloak.text=Cloak
+shoulders.text=Shoulders
+sleeves.text=Sleeves
+amulet.text=Amulet
+backpack.text=Backpack
+ring.text=Ring

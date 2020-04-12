@@ -1,0 +1,32 @@
+﻿
+item.equipment_mask.name=Маска
+item.equipment_neck.name=Ожерелье
+item.equipment_belt.name=Ремень
+item.equipment_gloves.name=Перчатки
+item.equipment_cloak.name=Плащ
+item.equipment_shoulders.name=Наплечники
+item.equipment_sleeves.name=Рукава
+item.equipment_amulet.name=Амулет
+item.equipment_backpack.name=Задний пакет
+item.equipment_ring.name=Кольцо
+
+item.uni_equipment.name=Универсальная Экипировка
+
+item.armor_helmet.name=Броня Шлем
+item.armor_vest.name=Броня Желет
+item.armor_pants.name=Броня Штаны
+item.armor_boots.name=Броня Ботинки
+
+item.armor_uni.name=Универсальная Броня
+
+slot_for.text=Слот для тип "%s".
+mask.text=Иаска
+neck.text=Шея
+belt.text=Ремень
+gloves.text=Перчатки
+cloak.text=Плащ
+shoulders.text=Наплечники
+sleeves.text=Рукава
+amulet.text=Амулет
+backpack.text=Рюкзак
+ring.text=Кольцо
