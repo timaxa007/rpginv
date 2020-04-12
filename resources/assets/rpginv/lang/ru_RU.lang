@@ -20,7 +20,7 @@ item.armor_boots.name=Броня Ботинки
 item.armor_uni.name=Универсальная Броня
 
 slot_for.text=Слот для тип "%s".
-mask.text=Иаска
+mask.text=Маска
 neck.text=Шея
 belt.text=Ремень
 gloves.text=Перчатки
