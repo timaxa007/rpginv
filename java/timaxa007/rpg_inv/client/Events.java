@@ -5,12 +5,9 @@ import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.GuiOpenEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import timaxa007.rpg_inv.RpgInventoryMod;
 import timaxa007.rpg_inv.api.ArmorModel;
@@ -100,18 +97,6 @@ public class Events {
 			acm.partRightLeg.set(event.renderer.modelBipedMain.bipedRightLeg);
 			acm.partLeftLeg.set(event.renderer.modelBipedMain.bipedLeftLeg);
 			acm.render(event.slot, event.entityPlayer);
-		}
-	}
-
-	//static EntityPlayerSP p;
-
-	@SubscribeEvent
-	public void entityMainMenu(GuiScreenEvent.DrawScreenEvent.Post event)  {
-		if (event.gui instanceof GuiMainMenu) {
-			Minecraft mc = Minecraft.getMinecraft();
-
-			//GuiInventory.func_147046_a(200, 200, 90, 58 - event.mouseX, 120 - event.mouseY, FMLClientHandler.instance().getClient().thePlayer);
-
 		}
 	}
 
