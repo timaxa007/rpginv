@@ -2,6 +2,7 @@ package timaxa007.rpg_inv;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -43,12 +44,32 @@ public class Events {
 		if (event.entity instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP)event.entity;
 			RpgEntityIEEP specialPlayer = RpgEntityIEEP.get(player);
-			if (specialPlayer == null) return;
 			NBTTagCompound nbt = new NBTTagCompound();
-			specialPlayer.saveNBTData(nbt);
-			SyncRpgEntityMessage message = new SyncRpgEntityMessage();
-			message.nbt = nbt;
-			RpgInventoryMod.network.sendTo(message, player);
+			if (specialPlayer != null) {
+				specialPlayer.saveNBTData(nbt);
+				SyncRpgEntityMessage message = new SyncRpgEntityMessage();
+				message.nbt = nbt;
+				message.entityID = player.getEntityId();
+				//RpgInventoryMod.network.sendToDimension(message, player.dimension);
+				RpgInventoryMod.network.sendToAllAround(message, new NetworkRegistry.TargetPoint(
+						player.dimension, player.posX, player.posY, player.posZ, 256));
+			}
+			//RpgInventoryMod.network.sendTo(message, player);
+		}
+	}
+
+	@SubscribeEvent
+	public void playerStartTracking(PlayerEvent.StartTracking event) {
+		if (event.entityPlayer instanceof EntityPlayerMP && event.target instanceof EntityPlayerMP) {
+			RpgEntityIEEP specialPlayer = RpgEntityIEEP.get((EntityPlayerMP)event.target);
+			if (specialPlayer != null) {
+				NBTTagCompound nbt = new NBTTagCompound();
+				specialPlayer.saveNBTData(nbt);
+				SyncRpgEntityMessage message = new SyncRpgEntityMessage();
+				message.nbt = nbt;
+				message.entityID = event.target.getEntityId();
+				RpgInventoryMod.network.sendTo(message, (EntityPlayerMP)event.entityPlayer);
+			}
 		}
 	}
 
@@ -112,7 +133,10 @@ public class Events {
 		message.entityID = player.getEntityId();
 		message.slotID = (byte)slotID;
 		message.item = current;
-		RpgInventoryMod.network.sendToDimension(message, player.dimension);
+		//RpgInventoryMod.network.sendToDimension(message, player.dimension);
+		RpgInventoryMod.network.sendToAllAround(message, new NetworkRegistry.TargetPoint(
+				player.dimension, player.posX, player.posY, player.posZ, 256));
+		//EntityTracker.trackedEntityIDs.get(player.getEntityId()).@EntityTrackerEntry@.blocksDistanceThreshold / 2
 	}
 
 	private static void checkItemArmor(EntityPlayer player, ItemStack old, ItemStack current, int slotID) {

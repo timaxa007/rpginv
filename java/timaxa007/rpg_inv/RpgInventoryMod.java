@@ -27,7 +27,7 @@ public class RpgInventoryMod {
 	public static final String
 	MODID = "rpginv",
 	NAME = "RPG Inventory Mod",
-	VERSION = "0.2 with Half";
+	VERSION = "0.3";
 
 	@Mod.Instance(MODID)
 	public static RpgInventoryMod instance;
@@ -62,6 +62,7 @@ public class RpgInventoryMod {
 
 		//Config.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new Events());
+		//FMLCommonHandler.instance().bus().register(new EventFML());
 
 		int i = 0;
 		for (Item itemEquipment; i < EnumEquipmentPart.names.length; ++i) {//is the Magic

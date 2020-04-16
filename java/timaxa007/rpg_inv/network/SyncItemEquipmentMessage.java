@@ -52,7 +52,7 @@ public class SyncItemEquipmentMessage implements IMessage {
 
 		@SideOnly(Side.CLIENT)
 		private void act(SyncItemEquipmentMessage packet) {
-			if (packet.entityID == Minecraft.getMinecraft().thePlayer.getEntityId()) return;
+			//if (packet.entityID == Minecraft.getMinecraft().thePlayer.getEntityId()) return;
 			Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(packet.entityID);
 			if (entity instanceof EntityPlayer) {
 				RpgEntityIEEP specialPlayer = RpgEntityIEEP.get((EntityPlayer)entity);
