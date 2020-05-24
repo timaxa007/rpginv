@@ -59,13 +59,7 @@ public class Events {
 			}
 
 			if (acm != null) {
-				acm.partHead.set(event.renderer.modelBipedMain.bipedHead);
-				acm.partBody.set(event.renderer.modelBipedMain.bipedBody);
-				acm.partRightArm.set(event.renderer.modelBipedMain.bipedRightArm);
-				acm.partLeftArm.set(event.renderer.modelBipedMain.bipedLeftArm);
-				acm.partRightLeg.set(event.renderer.modelBipedMain.bipedRightLeg);
-				acm.partLeftLeg.set(event.renderer.modelBipedMain.bipedLeftLeg);
-				acm.render(RpgEntityIEEP.eep[i], event.entityPlayer);
+				acm.render(event.renderer.modelBipedMain, RpgEntityIEEP.eep[i], slot, event.entityPlayer, event.partialRenderTick);
 			}
 		}
 
@@ -90,13 +84,7 @@ public class Events {
 		}
 
 		if (acm != null) {
-			acm.partHead.set(event.renderer.modelBipedMain.bipedHead);
-			acm.partBody.set(event.renderer.modelBipedMain.bipedBody);
-			acm.partRightArm.set(event.renderer.modelBipedMain.bipedRightArm);
-			acm.partLeftArm.set(event.renderer.modelBipedMain.bipedLeftArm);
-			acm.partRightLeg.set(event.renderer.modelBipedMain.bipedRightLeg);
-			acm.partLeftLeg.set(event.renderer.modelBipedMain.bipedLeftLeg);
-			acm.render(event.slot, event.entityPlayer);
+			acm.render(event.renderer.modelBipedMain, event.slot, event.stack, event.entityPlayer, event.partialRenderTick);
 		}
 	}
 

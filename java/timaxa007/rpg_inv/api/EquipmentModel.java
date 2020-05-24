@@ -4,56 +4,48 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import timaxa007.rpg_inv.registry.EnumEquipmentPart;
 
 @SideOnly(Side.CLIENT)
 public abstract class EquipmentModel {
 
-	public final PartModel
-	partHead = new PartModel(),
-	partBody = new PartModel(),
-	partRightArm = new PartModel(),
-	partLeftArm = new PartModel(),
-	partRightLeg = new PartModel(),
-	partLeftLeg = new PartModel();
+	public abstract void pre(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//До всех частей.
+	public abstract void post(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//После всех частей.
+	public abstract void partHead(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Голова.
+	public abstract void partBody(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Тело.
+	public abstract void partRightArm(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Правая рука.
+	public abstract void partLeftArm(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Левая рука.
+	public abstract void partRightLeg(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Правая нога.
+	public abstract void partLeftLeg(EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity);//Часть: Левая нога.
 
-	public int color = -1;//Раскраска брони в цвет.
-
-	public abstract void pre(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//До всех частей.
-	public abstract void post(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//После всех частей.
-	public abstract void partHead(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Голова.
-	public abstract void partBody(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Тело.
-	public abstract void partRightArm(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Правая рука.
-	public abstract void partLeftArm(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Левая рука.
-	public abstract void partRightLeg(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Правая нога.
-	public abstract void partLeftLeg(EnumEquipmentPart equipmentPart, EntityLivingBase entity);//Часть: Левая нога.
-
-	public void render(EnumEquipmentPart equipmentPart, EntityLivingBase entity) {
+	public void render(ModelBiped modelBipedMain, EnumEquipmentPart equipmentPart, ItemStack itemStack, EntityLivingBase entity, float partialRenderTick) {
 
 		GL11.glPushMatrix();
-
+		/*
 		if (color != -1) {
 			float red = (float)(color >> 16 & 255) / 255F;
 			float blue = (float)(color >> 8 & 255) / 255F;
 			float green = (float)(color & 255) / 255F;
 			GL11.glColor3f(red, blue, green);
 		}
+		 */
+		pre(equipmentPart, itemStack, entity);
 
-		pre(equipmentPart, entity);
-
-		float parTicks = 0.0625f;
+		float parTicks = 0.0625F;
 		float f6 = 2.0F;
 
-		if (partHead.showModel) {//partHead
+		if (modelBipedMain.bipedHead.showModel) {//partHead
 			GL11.glPushMatrix();
 			if (entity.isChild()) {
 				GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
 				GL11.glTranslatef(0.0F, 16.0F * parTicks, 0.0F);
 			}
-			blank(partHead, parTicks);
-			partHead(equipmentPart, entity);
-			//GL11.glTranslatef(-partHead.offsetX, -partHead.offsetY, -partHead.offsetZ);
+			modelBipedMain.bipedHead.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partHead(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
@@ -63,43 +55,43 @@ public abstract class EquipmentModel {
 			GL11.glTranslatef(0.0F, 24.0F * parTicks, 0.0F);
 		}
 
-		if (partBody.showModel) {//partBody
+		if (modelBipedMain.bipedBody.showModel) {//partBody
 			GL11.glPushMatrix();
-			blank(partBody, parTicks);
-			partBody(equipmentPart, entity);
-			//GL11.glTranslatef(-partBody.offsetX, -partBody.offsetY, -partBody.offsetZ);
+			modelBipedMain.bipedBody.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partBody(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
-		if (partRightArm.showModel) {//partRightArm
+		if (modelBipedMain.bipedRightArm.showModel) {//partRightArm
 			GL11.glPushMatrix();
-			blank(partRightArm, parTicks);
-			partRightArm(equipmentPart, entity);
-			//GL11.glTranslatef(-partRightArm.offsetX, -partRightArm.offsetY, -partRightArm.offsetZ);
+			modelBipedMain.bipedRightArm.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partRightArm(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
-		if (partLeftArm.showModel) {//partLeftArm
+		if (modelBipedMain.bipedLeftArm.showModel) {//partLeftArm
 			GL11.glPushMatrix();
-			blank(partLeftArm, parTicks);
-			partLeftArm(equipmentPart, entity);
-			//GL11.glTranslatef(-partLeftArm.offsetX, -partLeftArm.offsetY, -partLeftArm.offsetZ);
+			modelBipedMain.bipedLeftArm.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partLeftArm(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
-		if (partRightLeg.showModel) {//partRightLeg
+		if (modelBipedMain.bipedRightLeg.showModel) {//partRightLeg
 			GL11.glPushMatrix();
-			blank(partRightLeg, parTicks);
-			partRightLeg(equipmentPart, entity);
-			//GL11.glTranslatef(-partRightLeg.offsetX, -partRightLeg.offsetY, -partRightLeg.offsetZ);
+			modelBipedMain.bipedRightLeg.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partRightLeg(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
-		if (partLeftLeg.showModel) {//partLeftLeg
+		if (modelBipedMain.bipedLeftLeg.showModel) {//partLeftLeg
 			GL11.glPushMatrix();
-			blank(partLeftLeg, parTicks);
-			partLeftLeg(equipmentPart, entity);
-			//GL11.glTranslatef(-partLeftLeg.offsetX, -partLeftLeg.offsetY, -partLeftLeg.offsetZ);
+			modelBipedMain.bipedLeftLeg.postRender(parTicks);
+			GL11.glRotatef(180F, 1F, 0F, 0F);
+			partLeftLeg(equipmentPart, itemStack, entity);
 			GL11.glPopMatrix();
 		}
 
@@ -107,23 +99,12 @@ public abstract class EquipmentModel {
 			GL11.glPopMatrix();
 		}
 
-		post(equipmentPart, entity);
+		post(equipmentPart, itemStack, entity);
 
-		GL11.glColor3f(1F, 1F, 1F);
+		GL11.glColor4f(1F, 1F, 1F, 1F);
 
 		GL11.glPopMatrix();
 
-	}
-
-	private void blank(PartModel mr, float parTicks) {
-		GL11.glTranslatef(mr.offsetX, mr.offsetY, mr.offsetZ);
-		if (mr.rotationPointX != 0.0F || mr.rotationPointY != 0.0F || mr.rotationPointZ != 0.0F)
-			GL11.glTranslatef(mr.rotationPointX * parTicks, mr.rotationPointY * parTicks, mr.rotationPointZ * parTicks);
-		if (mr.rotateAngleZ != 0F) GL11.glRotatef(mr.rotateAngleZ * (180F / (float)Math.PI), 0F, 0F, 1F);
-		if (mr.rotateAngleY != 0F) GL11.glRotatef(mr.rotateAngleY * (180F / (float)Math.PI), 0F, 1F, 0F);
-		if (mr.rotateAngleX != 0F) GL11.glRotatef(mr.rotateAngleX * (180F / (float)Math.PI), 1F, 0F, 0F);
-		GL11.glRotatef(180F, 1F, 0F, 0F);
-		//GL11.glTranslatef(-mr.offsetX, -mr.offsetY, -mr.offsetZ);
 	}
 
 }

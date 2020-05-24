@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import timaxa007.rpg_inv.api.ArmorModel;
 
@@ -14,19 +15,19 @@ public class ArmorModelTest extends ArmorModel {
 	public ArmorModelTest() {}
 
 	@Override
-	public void pre(int slot, EntityLivingBase entity) {
+	public void pre(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		//GL11.glEnable(GL11.GL_BLEND);
 		//GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture_wood);
 	}
 
 	@Override
-	public void post(int slot, EntityLivingBase entity) {
+	public void post(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		//GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	@Override
-	public void partHead(int slot, EntityLivingBase entity) {
+	public void partHead(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(0F, -1.5F, 0F);
 		if (slot == 3) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "helmet"));
@@ -34,7 +35,7 @@ public class ArmorModelTest extends ArmorModel {
 	}
 
 	@Override
-	public void partBody(int slot, EntityLivingBase entity) {
+	public void partBody(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(0F, -1.5F, 0F);
 		if (slot == 2) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "chest_up"));
@@ -46,7 +47,7 @@ public class ArmorModelTest extends ArmorModel {
 	}
 
 	@Override
-	public void partRightArm(int slot, EntityLivingBase entity) {
+	public void partRightArm(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(0.3125F, -1.375F, 0F);
 		if (slot == 2) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "right_shoulders"));
@@ -54,7 +55,7 @@ public class ArmorModelTest extends ArmorModel {
 	}
 
 	@Override
-	public void partLeftArm(int slot, EntityLivingBase entity) {
+	public void partLeftArm(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(-0.3125F, -1.375F, 0F);
 		if (slot == 2) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "left_shoulders"));
@@ -62,7 +63,7 @@ public class ArmorModelTest extends ArmorModel {
 	}
 
 	@Override
-	public void partRightLeg(int slot, EntityLivingBase entity) {
+	public void partRightLeg(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(0.125F, -0.75F, 0F);
 		if (slot == 1) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "right_leggin"));
@@ -73,7 +74,7 @@ public class ArmorModelTest extends ArmorModel {
 	}
 
 	@Override
-	public void partLeftLeg(int slot, EntityLivingBase entity) {
+	public void partLeftLeg(int slot, ItemStack itemStack, EntityLivingBase entity) {
 		GL11.glTranslatef(-0.125F, -0.75F, 0F);
 		if (slot == 1) {
 			GL11.glCallList(Proxy.getRenderPart("armor", "left_leggin"));

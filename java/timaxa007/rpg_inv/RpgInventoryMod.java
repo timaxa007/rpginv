@@ -27,7 +27,7 @@ public class RpgInventoryMod {
 	public static final String
 	MODID = "rpginv",
 	NAME = "RPG Inventory Mod",
-	VERSION = "0.3";
+	VERSION = "0.4";
 
 	@Mod.Instance(MODID)
 	public static RpgInventoryMod instance;
@@ -60,7 +60,7 @@ public class RpgInventoryMod {
 		network.registerMessage(SyncItemEquipmentMessage.Handler.class, SyncItemEquipmentMessage.class, 2, Side.CLIENT);
 		//network.registerMessage(SyncItemEquipmentMessage.Handler.class, SyncItemEquipmentMessage.class, 2, Side.SERVER);
 
-		//Config.init(event.getSuggestedConfigurationFile());
+		Config.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new Events());
 		//FMLCommonHandler.instance().bus().register(new EventFML());
 

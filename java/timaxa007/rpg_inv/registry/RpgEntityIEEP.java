@@ -3,6 +3,7 @@ package timaxa007.rpg_inv.registry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -41,6 +42,23 @@ public class RpgEntityIEEP implements IExtendedEntityProperties {
 
 	public InventoryBasic getInventory() {
 		return inventory;
+	}
+
+	public void clearInventory() {
+		for (int i = 0; i < inventory.getSizeInventory(); ++i) {
+			inventory.setInventorySlotContents(i, null);
+		}
+	}
+
+	public void clearInventory(Item item, int metadata) {
+		if (item == null && metadata <= -1) clearInventory();
+		else {
+			for (int i = 0; i < inventory.getSizeInventory(); ++i) {
+				ItemStack slot = inventory.getStackInSlot(i);
+				if ((item == null || (slot != null && slot.getItem() == item)) && (metadata <= -1 || slot.getItemDamage() == metadata))
+					inventory.setInventorySlotContents(i, null);
+			}
+		}
 	}
 
 	@Override

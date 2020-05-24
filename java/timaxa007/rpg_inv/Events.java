@@ -149,4 +149,9 @@ public class Events {
 
 	}
 
+	@SubscribeEvent
+	public void playerBreakSpeed(PlayerEvent.BreakSpeed event) {
+		//System.out.println((event.entityPlayer.worldObj.isRemote ? "[C] " : "[S] ") + event.entityPlayer.getClass());
+	}
+
 }
