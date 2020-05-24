@@ -60,9 +60,7 @@ public class RpgInventoryMod {
 		network.registerMessage(SyncItemEquipmentMessage.Handler.class, SyncItemEquipmentMessage.class, 2, Side.CLIENT);
 		//network.registerMessage(SyncItemEquipmentMessage.Handler.class, SyncItemEquipmentMessage.class, 2, Side.SERVER);
 
-		Config.init(event.getSuggestedConfigurationFile());
 		MinecraftForge.EVENT_BUS.register(new Events());
-		//FMLCommonHandler.instance().bus().register(new EventFML());
 
 		int i = 0;
 		for (Item itemEquipment; i < EnumEquipmentPart.names.length; ++i) {//is the Magic
